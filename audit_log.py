@@ -5,14 +5,15 @@ from datetime import datetime, timezone
 LOG_PATH = os.path.join(os.path.dirname(__file__), "audit_log.jsonl")
 
 
-def log_submission(*, content_id, creator_id, attribution, confidence, signal1_score, status):
+def log_submission(*, content_id, creator_id, attribution, confidence, llm_score, stylometric_score, status):
     entry = {
         "content_id": content_id,
         "creator_id": creator_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "attribution": attribution,
         "confidence": confidence,
-        "signal1_score": signal1_score,
+        "llm_score": llm_score,
+        "stylometric_score": stylometric_score,
         "status": status,
     }
     with open(LOG_PATH, "a") as f:
